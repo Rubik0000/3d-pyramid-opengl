@@ -16,7 +16,7 @@ public class Main {
 
         // The canvas
         final GLCanvas glcanvas = new GLCanvas( capabilities );
-        Piramid piramid = new Piramid(6, 20, 40, 1);
+        Piramid piramid = new Piramid(5, 20, 40, 0.4f);
 
         glcanvas.addGLEventListener( piramid );
         glcanvas.setSize( 800, 400 );

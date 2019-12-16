@@ -46,7 +46,7 @@ public class Piramid implements GLEventListener {
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_SRC_ALPHA);
 
         float[] light_diffuse = {1.0f, 0.0f, 0.0f, 1.0f};  /* Red diffuse light. */
-        float[] light_position = {0f, 1f, -1.0f, 0.0f};
+        float[] light_position = {-1f, 0f, 1.0f, 0.0f};
 
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, light_diffuse, 0);
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, light_position, 0);
@@ -56,7 +56,7 @@ public class Piramid implements GLEventListener {
         /* Use depth buffering for hidden surface elimination. */
         gl.glEnable(GL2.GL_DEPTH_TEST);
 
-        gl.glRotatef( -45, 1, 1, 0);
+        //gl.glRotatef( -45, 1, 1, 0);
 
     }
 
@@ -81,9 +81,11 @@ public class Piramid implements GLEventListener {
         //gl.glRotatef( 30f, 1.0f, 0, 0);
         //gl.glRotatef( 40, 0, 1, 0);
 
+        gl.glRotatef( 45, 1, 0, 0);
+        gl.glRotatef( 225, 0, 1, 0);
 
-        gl.glRotatef( a, 0, 1, 0);
-        a += 0.2;
+        //gl.glRotatef( a, 0, 1, 0);
+        //a += 0.2;
 
         /*gl.glEnable( GL2.GL_LIGHTING );
         gl.glEnable( GL2.GL_LIGHT0 );
@@ -107,7 +109,8 @@ public class Piramid implements GLEventListener {
             float y1 = (float) (radius * Math.sin(angle));
             v[i][0] = x1;
             v[i][1] = y1;
-            gl.glNormal3f(-1, 1 ,0);
+            gl.glNormal3f(Math.signum(x1) , Math.signum(y1) ,1);
+
             gl.glVertex3f(x1, y1, 0);
             angle += angleStep;
             float x2 = (float) (radius * Math.cos(angle));
@@ -127,6 +130,7 @@ public class Piramid implements GLEventListener {
 
 
         gl.glBegin(GL2.GL_POLYGON);
+        gl.glNormal3f(0 , 0 ,-1);
         for (float[] floats : v) {
             gl.glVertex3f(floats[0], floats[1], 0);
         }
@@ -137,6 +141,7 @@ public class Piramid implements GLEventListener {
         // multicolor diffuse
         /*float[] diffuseLight = { 60, 0, 100, 0 };
         gl.glLightfv( GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuseLight, 0 );*/
+
 
         gl.glFlush();
 
