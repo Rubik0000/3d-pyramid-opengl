@@ -6,24 +6,28 @@ import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Main {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         final GLProfile profile = GLProfile.get( GLProfile.GL2 );
         GLCapabilities capabilities = new GLCapabilities( profile );
 
         // The canvas
         final GLCanvas glcanvas = new GLCanvas( capabilities );
-        Piramid piramid = new Piramid(5, 20, 40, 0.4f);
+        Piramid piramid = new Piramid(5, 20, 40, 0.5f);
 
         glcanvas.addGLEventListener( piramid );
         glcanvas.setSize( 800, 400 );
+        glcanvas.addKeyListener(new PiramidKeyAdapter(piramid, glcanvas));
 
-        final JFrame frame = new JFrame ( "3d Triangle (shallow)" );
+        final JFrame frame = new JFrame ();
 
-        frame.getContentPane().add( glcanvas );
+        frame.getContentPane().add(glcanvas);
+        frame.setResizable(false);
         frame.setSize( frame.getContentPane().getPreferredSize() );
         frame.setVisible( true );
 
